@@ -1,0 +1,14 @@
+<mat-list>
+    <mat-list-item *ngFor="let todo of toDoList">
+        <div mat-line>
+            <div [ngSwitch]="todo.status">
+                <h3 *ngSwitchCase="todo.status!==0" class="ongoing">{{todo.title}}</h3>
+                <h3 *ngSwitchCase="todo.status!==1" class="done">{{todo.title}}</h3>
+                <h3 *ngSwitchCase="todo.status!==2" class="overdue">{{todo.title}}</h3>
+                <h3 *ngSwitchDefault>{{todo.title}}</h3>
+            </div>
+        </div>
+        <p mat-line>{{todo.description}}</p>
+        <p mat-line>Due date : {{todo.dueDate | date: 'medium' }}</p>
+    </mat-list-item>
+</mat-list>
