@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatListModule } from '@angular/material/List';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers'
 
 @NgModule({
   declarations: [
@@ -19,14 +18,7 @@ import { reducers, metaReducers } from './reducers'
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatListModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
-      }
-    })
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
