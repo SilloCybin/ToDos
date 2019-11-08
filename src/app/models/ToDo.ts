@@ -1,7 +1,7 @@
 enum Status {
-    Ongoing,
-    Done,
-    Overdue
+    Ongoing = 'Ongoing',
+    Done = 'Done',
+    Overdue = 'Overdue'
 }
 
 export interface ToDo {
