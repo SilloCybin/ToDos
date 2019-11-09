@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ToDo } from 'src/app/store/models/ToDo';
+import { ToDo } from 'src/app/models/ToDo';
+import {Observable, Subscription} from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/app.state';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,11 +11,26 @@ import { ToDo } from 'src/app/store/models/ToDo';
 })
 export class DashboardComponent implements OnInit {
 
-  toDoList = [];
+  toDoListObs: Observable<ToDo[]>;
+  toDoListSub: Subscription;
+  toDoList: ToDo[];
+  now: Date;
 
-  constructor() { }
+  constructor(private store: Store<AppState>) {
+    this.toDoListObs = store.select('todo');
+  }
 
   ngOnInit() {
+    this.toDoListSub = this.toDoListObs.subscribe(
+      (t: ToDo[]) => {
+        this.toDoList = t;
+      }
+    );
+    this.now = new Date();
+  }
+
+  sortByDate(toDoList: ToDo[]){
+
   }
 
 }
