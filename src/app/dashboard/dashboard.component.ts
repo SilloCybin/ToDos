@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToDo } from 'src/app/models/ToDo';
-import {Observable, Subscription} from 'rxjs';
-import { Store } from '@ngrx/store';
-import { AppState } from '../store/app.state';
+import { Observable } from 'rxjs';
+import { ToDoService } from '../services/to-do.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,26 +10,30 @@ import { AppState } from '../store/app.state';
 })
 export class DashboardComponent implements OnInit {
 
-  toDoListObs: Observable<ToDo[]>;
-  toDoListSub: Subscription;
-  toDoList: ToDo[];
-  now: Date;
+  todos$: Observable<ToDo[]>;
 
-  constructor(private store: Store<AppState>) {
-    this.toDoListObs = store.select('todo');
+  constructor(private todoService: ToDoService) {
+    this.todos$ = todoService.entities$;
   }
 
   ngOnInit() {
-    this.toDoListSub = this.toDoListObs.subscribe(
-      (t: ToDo[]) => {
-        this.toDoList = t;
-      }
-    );
-    this.now = new Date();
+    this.getToDos();
   }
 
-  sortByDate(toDoList: ToDo[]){
+  addToDo(toDo: ToDo) {
+    this.todoService.add(toDo);
+  }
 
+  deleteToDo(toDo: ToDo) {
+    this.todoService.delete(toDo.id);
+  }
+
+  getToDos() {
+    this.todoService.getAll();
+  }
+
+  updateToDo(toDo: ToDo) {
+    this.todoService.update(toDo);
   }
 
 }

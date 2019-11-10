@@ -3,8 +3,8 @@
     <div mat-line>
       <h3>{{toDo.title}}</h3>
     </div>
-      <p mat-line *ngIf="toDo.status == status.Ongoing" class="ongoing">{{toDo.status}} (Due by : {{toDo.dueDate | date: 'medium' }})</p>
-      <p mat-line *ngIf="toDo.status == status.Overdue" class="overdue">{{toDo.status}} (Due by : {{toDo.dueDate | date: 'medium' }})</p>
-      <p mat-line *ngIf="toDo.status == status.Done" class="done">{{toDo.status}} (Due by : {{toDo.dueDate | date: 'medium' }})</p>
+      <p mat-line *ngIf="toDo.state == status.Ongoing" class="ongoing">{{toDo.state}} (Due by : {{toDo.dueDate | date: 'medium' }})</p>
+      <p mat-line *ngIf="toDo.state == status.Overdue" class="overdue">{{toDo.state}} (Due by : {{toDo.dueDate | date: 'medium' }})</p>
+      <p mat-line *ngIf="toDo.state == status.Done" class="done">{{toDo.state}} (Due by : {{toDo.dueDate | date: 'medium' }})</p>
   </mat-list-item>
 </mat-list>

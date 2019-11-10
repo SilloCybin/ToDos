@@ -1,29 +1,33 @@
-import {Optional} from '@angular/core';
-
-export enum Status {
+export enum State {
     Ongoing = 'Ongoing',
     Done = 'Done',
     Overdue = 'Overdue'
 }
 
-export class ToDo {
+export interface ToDo {
 
+    id: number;
     title: string;
     description: string;
     dueDate: Date;
-    status?: Status;
+    state?: State;
     rank?: number;
 
-    constructor(title: string, description: string, dueDate: Date, status?: Status, rank?: number,){
-      this.title = title;
-      this.description = description;
-      this.dueDate = dueDate;
-      this.status = status;
-      this.rank = rank;
-    }
+}
 
-    setStatus(status: Status){
-      this.status = status;
-    }
+export class ToDo {
 
+  id: number;
+  title: string;
+  description: string;
+  dueDate: Date;
+  state?: State;
+
+  constructor(id: number, title: string, description: string, dueDate: Date) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.dueDate = dueDate;
+    this.state = State.Ongoing;
+  }
 }
