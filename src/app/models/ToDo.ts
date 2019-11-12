@@ -1,33 +1,17 @@
-export enum State {
-    Ongoing = 'Ongoing',
-    Done = 'Done',
-    Overdue = 'Overdue'
-}
-
-export interface ToDo {
-
-    id: number;
-    title: string;
-    description: string;
-    dueDate: Date;
-    state?: State;
-    rank?: number;
-
-}
-
 export class ToDo {
 
   id: number;
   title: string;
   description: string;
-  dueDate: Date;
-  state?: State;
+  isCompleted: boolean;
+  completedBy?: Date;
 
-  constructor(id: number, title: string, description: string, dueDate: Date) {
+  constructor(id: number, title: string, description: string) {
     this.id = id;
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate;
-    this.state = State.Ongoing;
+    this.isCompleted = false;
+    this.completedBy = null;
   }
+
 }

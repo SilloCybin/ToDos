@@ -1,6 +1,10 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ToDoListComponent } from './to-do-list/to-do-list.component';
+import { ToDoComponent } from './to-do/to-do.component';
+import {MatCheckbox, MatList, MatListItem, MatRipple} from '@angular/material';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -9,7 +13,7 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent, DashboardComponent, ToDoListComponent, ToDoComponent, MatCheckbox, MatListItem, MatList, MatRipple
       ],
     }).compileComponents();
   }));

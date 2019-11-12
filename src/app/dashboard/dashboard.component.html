@@ -1,7 +1,3 @@
 <div *ngIf="todos$ | async as todos">
-  <div *ngFor="let todo of todos">
-    <app-to-do [toDo]="todo" (update)="updateToDo($event)"></app-to-do>
-    <br>
-    <br>
-  </div>
+  <app-to-do-list [toDoList]="todos" (update)="updateToDo($event)"></app-to-do-list>
 </div>

@@ -1,10 +1,11 @@
 <mat-list>
   <mat-list-item>
     <div mat-line>
-      <h3>{{toDo.title}}</h3>
+      <h3 *ngIf="toDo.isCompleted" style="text-decoration: line-through">{{toDo.title}}</h3>
+      <h3 *ngIf="!toDo.isCompleted">{{toDo.title}}</h3>
     </div>
-      <p mat-line *ngIf="toDo.state == status.Ongoing" class="ongoing">{{toDo.state}} (Due by : {{toDo.dueDate | date: 'medium' }})</p>
-      <p mat-line *ngIf="toDo.state == status.Overdue" class="overdue">{{toDo.state}} (Due by : {{toDo.dueDate | date: 'medium' }})</p>
-      <p mat-line *ngIf="toDo.state == status.Done" class="done">{{toDo.state}} (Due by : {{toDo.dueDate | date: 'medium' }})</p>
+    <p mat-line *ngIf="toDo.isCompleted" class="done">Done</p>
+    <p mat-line *ngIf="!toDo.isCompleted" class="unfinished">Unfinished</p>
+    <mat-checkbox labelPosition="before" mat-line style="font-style: italic" (change)="OnChange()" [checked]="isChecked">Mark as Done</mat-checkbox>
   </mat-list-item>
 </mat-list>
