@@ -4,3 +4,16 @@
 .unfinished{
   color: orangered;
 }
+div #container{
+  display: flex;
+  justify-content: center;
+}
+.mat-card{
+  display: flex;
+  flex-direction: column;
+}
+.mat-card .button{
+  justify-self: center;
+}
+
+

@@ -10,6 +10,8 @@ describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
   let spy : any;
+  let button: any;
+  let goToAddToDoSpy: any;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -66,6 +68,13 @@ describe('DashboardComponent', () => {
   it('should make getToDos behave correctly', () => {
     spy = spyOn(component, 'getToDos').and.callThrough();
     component.ngOnInit();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should fire goToAddToDo and navigate correctly when button is pressed', () => {
+    button = fixture.debugElement.nativeElement.querySelector('.div button');
+    goToAddToDoSpy = spyOn(component, 'goToAddToDo').and.callThrough();
+    button.click();
     expect(spy).toHaveBeenCalled();
   });
 });

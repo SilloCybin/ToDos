@@ -10,7 +10,7 @@ import { ToDoComponent } from './to-do/to-do.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule, MatCardModule, MatCheckboxModule, MatInputModule } from '@angular/material';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';

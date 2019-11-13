@@ -68,7 +68,6 @@ describe('ToDoComponent', () => {
     goToSingleViewSpy = spyOn(component, 'goToSingleView').and.callThrough();
     button.click();
     expect(goToSingleViewSpy).toHaveBeenCalled();
-
-  })
+  });
 
 });
