@@ -3,7 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardComponent } from './dashboard.component';
 import { ToDoListComponent } from '../to-do-list/to-do-list.component';
 import { ToDoComponent } from '../to-do/to-do.component';
-import { MatCheckbox, MatList, MatListItem, MatRipple } from '@angular/material';
+import {MatCard, MatCardTitle, MatCheckbox, MatList, MatListItem, MatRipple} from '@angular/material';
+import {EntityCollectionServiceElementsFactory, EntityDispatcherFactory} from '@ngrx/data';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -12,7 +13,18 @@ describe('DashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponent, ToDoListComponent, ToDoComponent, MatCheckbox, MatList, MatListItem, MatRipple ]
+      declarations: [
+        DashboardComponent,
+        ToDoListComponent,
+        ToDoComponent,
+        MatCheckbox,
+        MatList,
+        MatListItem,
+        MatRipple,
+        MatCard,
+        MatCardTitle
+      ],
+      providers: []
     })
     .compileComponents();
   }));

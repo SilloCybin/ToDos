@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ToDoComponent } from './to-do.component';
-import { MatCheckbox, MatList, MatListItem, MatRipple } from '@angular/material';
+import {MatCard, MatCheckbox, MatList, MatListItem, MatRipple} from '@angular/material';
 import {ToDo} from '../models/ToDo';
 import {RouterTestingModule} from "@angular/router/testing";
 import {Routes} from '@angular/router';
@@ -26,7 +26,7 @@ describe('ToDoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToDoComponent, DashboardComponent, SingleToDoViewComponent, MatCheckbox, MatListItem, MatList, MatRipple ],
+      declarations: [ ToDoComponent, DashboardComponent, SingleToDoViewComponent, MatCheckbox, MatListItem, MatList, MatRipple, MatCard ],
       imports: [RouterTestingModule.withRoutes(routes)],
       schemas: [NO_ERRORS_SCHEMA]
     })

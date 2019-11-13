@@ -9,8 +9,8 @@ import { ToDoComponent } from './to-do/to-do.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule } from '@angular/material/list';
-import { MatCheckboxModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { MatButtonModule, MatCardModule, MatCheckboxModule, MatInputModule } from '@angular/material';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -21,11 +21,13 @@ import { InMemoryDataService } from './services/in-memory-data.service';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import { SingleToDoViewComponent } from './single-to-do-view/single-to-do-view.component';
 import { RouterModule, Routes } from '@angular/router';
+import { AddToDoComponent } from './add-to-do/add-to-do.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
-  { path : 'Dashboard', component : DashboardComponent },
-  { path: 'ToDo/:id', component: SingleToDoViewComponent }
+  { path: 'Dashboard', component : DashboardComponent },
+  { path: 'ToDo/:id', component: SingleToDoViewComponent },
+  { path: 'AddToDo', component: AddToDoComponent}
 ];
 
 @NgModule({
@@ -35,6 +37,7 @@ const routes: Routes = [
     ToDoComponent,
     ToDoListComponent,
     SingleToDoViewComponent,
+    AddToDoComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,10 +51,14 @@ const routes: Routes = [
     MatListModule,
     MatCheckboxModule,
     FormsModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot(entityConfig),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    ReactiveFormsModule
   ],
   providers: [{ provide: InMemoryDataService, useExisting: InMemoryDbService }],
   bootstrap: [AppComponent],

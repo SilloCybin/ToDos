@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SingleToDoViewComponent } from './single-to-do-view.component';
+import {ActivatedRoute} from '@angular/router';
 
 describe('SingleToDoViewComponent', () => {
   let component: SingleToDoViewComponent;
@@ -11,7 +12,8 @@ describe('SingleToDoViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SingleToDoViewComponent ]
+      declarations: [ SingleToDoViewComponent ],
+      providers: [ ActivatedRoute ]
     })
     .compileComponents();
   }));

@@ -4,7 +4,8 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import { ToDoComponent } from './to-do/to-do.component';
-import {MatCheckbox, MatList, MatListItem, MatRipple} from '@angular/material';
+import {MatCard, MatCardModule, MatCardTitle, MatCheckbox, MatDivider, MatList, MatListItem, MatRipple} from '@angular/material';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -13,8 +14,18 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent, DashboardComponent, ToDoListComponent, ToDoComponent, MatCheckbox, MatListItem, MatList, MatRipple
-      ],
+        AppComponent,
+        DashboardComponent,
+        ToDoListComponent,
+        ToDoComponent,
+        MatCheckbox,
+        MatListItem,
+        MatList,
+        MatRipple,
+        MatDivider,
+        MatCard,
+        MatCardTitle
+      ]
     }).compileComponents();
   }));
 
@@ -27,13 +38,7 @@ describe('AppComponent', () => {
   it(`should have as title 'ToDos'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('ToDos');
+    expect(app.title).toEqual('You gotta do what you gotta do');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('ToDos app is running!');
-  });
 });

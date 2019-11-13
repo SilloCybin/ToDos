@@ -1,3 +1,4 @@
+<button mat-raised-button color="accent" type="button" (click)="goToAddToDo()">Create new To Do</button>
 <div *ngIf="todos$ | async as todos">
   <app-to-do-list [toDoList]="todos" (update)="updateToDo($event)"></app-to-do-list>
 </div>

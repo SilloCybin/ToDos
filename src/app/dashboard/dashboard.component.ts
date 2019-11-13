@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToDo } from 'src/app/models/ToDo';
 import { Observable } from 'rxjs';
 import { ToDoService } from '../services/to-do.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,7 @@ export class DashboardComponent implements OnInit {
 
   todos$: Observable<ToDo[]>;
 
-  constructor(private toDoService: ToDoService) {
+  constructor(private toDoService: ToDoService, private router: Router) {
     this.todos$ = toDoService.entities$;
   }
 
@@ -34,6 +35,10 @@ export class DashboardComponent implements OnInit {
 
   updateToDo(toDo: ToDo) {
     this.toDoService.update(toDo);
+  }
+
+  goToAddToDo(){
+    this.router.navigate(['/AddToDo/']);
   }
 
 }
