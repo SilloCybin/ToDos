@@ -3,17 +3,32 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ToDoComponent } from './to-do.component';
 import { MatCheckbox, MatList, MatListItem, MatRipple } from '@angular/material';
 import {ToDo} from '../models/ToDo';
+import {RouterTestingModule} from "@angular/router/testing";
+import {Routes} from '@angular/router';
+import {DashboardComponent} from '../dashboard/dashboard.component';
+import {SingleToDoViewComponent} from '../single-to-do-view/single-to-do-view.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 describe('ToDoComponent', () => {
   let component: ToDoComponent;
   let fixture: ComponentFixture<ToDoComponent>;
-  let spy: any;
+  let onChangespy: any;
+  let goToSingleViewSpy: any;
   let checkbox: any;
+  let button: any;
+
+  const routes: Routes = [
+    { path : '', redirectTo: 'Dashboard', pathMatch: 'full' },
+    { path : 'Dashboard', component : DashboardComponent },
+    { path : 'ToDo/:id', component : SingleToDoViewComponent }
+  ];
 
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToDoComponent, ToDoComponent, MatCheckbox, MatListItem, MatList, MatRipple ]
+      declarations: [ ToDoComponent, DashboardComponent, SingleToDoViewComponent, MatCheckbox, MatListItem, MatList, MatRipple ],
+      imports: [RouterTestingModule.withRoutes(routes)],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
@@ -24,8 +39,9 @@ describe('ToDoComponent', () => {
     component.toDo = new ToDo(1,
                               "Make a backup",
                               "Buy an external hard drive and back up the store on your computer");
-    checkbox = fixture.debugElement.nativeElement.querySelector('.mat-list mat-list-item mat-checkbox label');
-    spy = spyOn(component, 'OnChange').and.callThrough();
+    checkbox = fixture.debugElement.nativeElement.querySelector('.mat-list-item mat-checkbox label');
+    button = fixture.debugElement.nativeElement.querySelector('.mat-list-item span button');
+    onChangespy = spyOn(component, 'OnChange').and.callThrough();
     fixture.detectChanges();
   });
 
@@ -35,7 +51,7 @@ describe('ToDoComponent', () => {
 
   it('should fire OnChange when checkbox is toggled', () => {
     checkbox.click();
-    expect(spy).toHaveBeenCalled();
+    expect(onChangespy).toHaveBeenCalled();
     expect(component.toDo.isCompleted).toEqual(true);
     expect(component.toDo.completedBy).not.toEqual(null);
     expect(component.toDo.completedBy).not.toEqual(undefined);
@@ -47,5 +63,12 @@ describe('ToDoComponent', () => {
     expect(component.toDo.isCompleted).toEqual(false);
     expect(component.toDo.completedBy).toEqual(null);
   });
+
+  it('should take user to singleToDoViewComponent', () => {
+    goToSingleViewSpy = spyOn(component, 'goToSingleView').and.callThrough();
+    button.click();
+    expect(goToSingleViewSpy).toHaveBeenCalled();
+
+  })
 
 });

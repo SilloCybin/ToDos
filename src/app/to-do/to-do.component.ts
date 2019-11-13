@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { ToDo } from '../models/ToDo';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-to-do',
@@ -12,7 +13,7 @@ export class ToDoComponent implements OnInit {
   @Output() update = new EventEmitter<ToDo>();
   isChecked: boolean;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
@@ -31,5 +32,9 @@ export class ToDoComponent implements OnInit {
       this.toDo.completedBy = null;
     }
     this.update.emit({...this.toDo });
+  }
+
+  goToSingleView(){
+    this.router.navigate(['/ToDo/', this.toDo.id]);
   }
 }

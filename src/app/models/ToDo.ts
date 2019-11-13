@@ -4,7 +4,7 @@ export class ToDo {
   title: string;
   description: string;
   isCompleted: boolean;
-  completedBy?: Date;
+  completedBy?: any;
 
   constructor(id: number, title: string, description: string) {
     this.id = id;

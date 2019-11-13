@@ -12,8 +12,8 @@ export class DashboardComponent implements OnInit {
 
   todos$: Observable<ToDo[]>;
 
-  constructor(private todoService: ToDoService) {
-    this.todos$ = todoService.entities$;
+  constructor(private toDoService: ToDoService) {
+    this.todos$ = toDoService.entities$;
   }
 
   ngOnInit() {
@@ -21,19 +21,19 @@ export class DashboardComponent implements OnInit {
   }
 
   addToDo(toDo: ToDo) {
-    this.todoService.add(toDo);
+    this.toDoService.add(toDo);
   }
 
   deleteToDo(toDo: ToDo) {
-    this.todoService.delete(toDo.id);
+    this.toDoService.delete(toDo.id);
   }
 
   getToDos() {
-    this.todoService.getAll();
+    this.toDoService.getAll();
   }
 
   updateToDo(toDo: ToDo) {
-    this.todoService.update(toDo);
+    this.toDoService.update(toDo);
   }
 
 }

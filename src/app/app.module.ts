@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule, InMemoryDbService } from 'angular-in-memory-web-api';
 
@@ -20,6 +19,14 @@ import { entityConfig } from './store/entity-metada';
 
 import { InMemoryDataService } from './services/in-memory-data.service';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
+import { SingleToDoViewComponent } from './single-to-do-view/single-to-do-view.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
+  { path : 'Dashboard', component : DashboardComponent },
+  { path: 'ToDo/:id', component: SingleToDoViewComponent }
+];
 
 @NgModule({
   declarations: [
@@ -27,10 +34,10 @@ import { ToDoListComponent } from './to-do-list/to-do-list.component';
     DashboardComponent,
     ToDoComponent,
     ToDoListComponent,
+    SingleToDoViewComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
       dataEncapsulation: false,
@@ -44,8 +51,10 @@ import { ToDoListComponent } from './to-do-list/to-do-list.component';
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot(entityConfig),
+    RouterModule.forRoot(routes)
   ],
   providers: [{ provide: InMemoryDataService, useExisting: InMemoryDbService }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [RouterModule]
 })
 export class AppModule { }

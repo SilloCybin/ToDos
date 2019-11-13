@@ -1,5 +1,6 @@
-<div *ngFor="let todo of toDoList">
-  <app-to-do [toDo]="todo" (update)="relayUpdate($event)"></app-to-do>
-  <br>
-  <br>
-</div>
+<mat-list>
+  <div *ngFor="let todo of toDoList">
+    <app-to-do [toDo]="todo" (update)="relayUpdate($event)"></app-to-do>
+    <br>
+  </div>
+</mat-list>

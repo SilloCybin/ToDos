@@ -15,6 +15,7 @@ export class ToDoListComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges) {
+    this.checkForDateStrings();
     this.sortToDos();
   }
 
@@ -29,7 +30,17 @@ export class ToDoListComponent implements OnChanges {
   }
 
   getTime(date?: Date) {
-    return date != null ? date.getTime() : 0;
+    return date != undefined ? date.getTime() : 0;
+  }
+
+  checkForDateStrings(){
+    for(let todo of this.toDoList){
+      if(todo.isCompleted){
+        if(typeof todo.completedBy == 'string'){
+          todo.completedBy = new Date(todo.completedBy);
+        }
+      }
+    }
   }
 
 
