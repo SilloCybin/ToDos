@@ -1,17 +1,26 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ToDoService } from './to-do.service';
-import {EntityActionFactory, EntityCollectionServiceElementsFactory, EntityDispatcherFactory} from 'ngrx-data';
-import {StateObservable, Store} from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
+import { Actions, EffectSources } from '@ngrx/effects';
+import { EntityDataModuleWithoutEffects } from '@ngrx/data';
+import { entityConfig } from '../store/entity-metada';
+import { HttpClientModule } from '@angular/common/http';
+import { DefaultDataServiceFactory, NgrxDataModule } from 'ngrx-data';
 
 describe('ToDoService', () => {
+
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
-      EntityCollectionServiceElementsFactory,
-      EntityDispatcherFactory,
-      EntityActionFactory,
-      Store,
-      StateObservable
+      Actions,
+      DefaultDataServiceFactory,
+      EffectSources
+    ],
+    imports: [
+      EntityDataModuleWithoutEffects,
+      NgrxDataModule.forRoot(entityConfig),
+      StoreModule.forRoot({}),
+      HttpClientModule
     ]
   }));
 
@@ -19,4 +28,5 @@ describe('ToDoService', () => {
     const service: ToDoService = TestBed.get(ToDoService);
     expect(service).toBeTruthy();
   });
+
 });
