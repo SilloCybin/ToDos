@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ToDoService } from './to-do.service';
-import {EntityActionFactory, EntityCollectionServiceElementsFactory, EntityDispatcherFactory} from '@ngrx/data';
+import {EntityActionFactory, EntityCollectionServiceElementsFactory, EntityDispatcherFactory} from 'ngrx-data';
 import {StateObservable, Store} from '@ngrx/store';
 
 describe('ToDoService', () => {

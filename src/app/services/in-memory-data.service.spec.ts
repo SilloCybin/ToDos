@@ -5,7 +5,10 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 describe('InMemoryDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    providers: [{ provide: InMemoryDataService, useExisting: InMemoryDbService }]
+    providers: [
+      { provide: InMemoryDataService, useExisting: InMemoryDbService },
+      InMemoryDbService
+    ]
   }));
 
   it('should be created', () => {
