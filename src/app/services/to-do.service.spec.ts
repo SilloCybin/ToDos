@@ -1,22 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ToDoService } from './to-do.service';
-import { EntityDataModuleWithoutEffects } from '@ngrx/data';
-import { StoreModule} from '@ngrx/store';
-import { DefaultDataServiceFactory, NgrxDataModule } from 'ngrx-data';
-import { Actions, EffectSources } from '@ngrx/effects';
-import { entityConfig } from '../store/entity-metada';
-import { HttpClientModule } from '@angular/common/http';
+import {EntityActionFactory, EntityCollectionServiceElementsFactory, EntityDispatcherFactory} from '@ngrx/data';
+import {StateObservable, Store} from '@ngrx/store';
 
 describe('ToDoService', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    providers: [Actions, DefaultDataServiceFactory, EffectSources],
-    imports: [
-      EntityDataModuleWithoutEffects,
-      NgrxDataModule.forRoot(entityConfig),
-      StoreModule.forRoot({}),
-      HttpClientModule
-      ]
+    providers: [
+      EntityCollectionServiceElementsFactory,
+      EntityDispatcherFactory,
+      EntityActionFactory,
+      Store,
+      StateObservable
+    ]
   }));
 
   it('should be created', () => {

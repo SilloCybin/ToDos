@@ -4,8 +4,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import { ToDoComponent } from './to-do/to-do.component';
-import {MatCard, MatCardModule, MatCardTitle, MatCheckbox, MatDivider, MatList, MatListItem, MatRipple} from '@angular/material';
-import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {MatCard, MatCardTitle, MatCheckbox, MatDivider, MatList, MatListItem, MatRipple} from '@angular/material';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -35,10 +34,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'ToDos'`, () => {
+  it(`should have as title 'To Do Memo’`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('You gotta do what you gotta do');
+    expect(app.title).toEqual('To Do Memo');
   });
 
 });

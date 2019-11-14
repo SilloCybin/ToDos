@@ -16,8 +16,8 @@
           </mat-form-field>
         </div>
       </div>
-      <button mat-raised-button color="accent" type="button" (click)="goBackToDashboard()">Cancel</button>
-      <button mat-raised-button color="primary" type="submit" [disabled]="addToDoForm.pristine || addToDoForm.invalid">Add To Do</button>
+      <button id="cancel_button" mat-raised-button color="accent" type="button" (click)="goBackToDashboard()">Cancel</button>
+      <button id="submit_button" mat-raised-button color="primary" type="submit" [disabled]="addToDoForm.pristine || addToDoForm.invalid">Add To Do</button>
     </form>
   </mat-card-content>
 </mat-card>

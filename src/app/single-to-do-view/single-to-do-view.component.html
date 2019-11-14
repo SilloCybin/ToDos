@@ -1,10 +1,14 @@
 <div *ngIf="todo$ | async as toDo">
-  <div>
-    <h3 *ngIf="toDo.isCompleted" style="text-decoration: line-through">{{toDo.title}}</h3>
-    <h3 *ngIf="!toDo.isCompleted">{{toDo.title}}</h3>
+  <div id="container">
+    <mat-card>
+      <div>
+        <h3 *ngIf="toDo.isCompleted" style="text-decoration: line-through">{{toDo.title}}</h3>
+        <h3 *ngIf="!toDo.isCompleted">{{toDo.title}}</h3>
+      </div>
+      <p>{{toDo.description}}</p>
+      <p *ngIf="toDo.isCompleted" class="done">Done</p>
+      <p *ngIf="!toDo.isCompleted" class="unfinished">Unfinished</p>
+      <button mat-raised-button color="accent" type="button" (click)="goBackToDashboard()">Back to dashboard</button>
+    </mat-card>
   </div>
-  <p>{{toDo.description}}</p>
-  <p *ngIf="toDo.isCompleted" class="done">Done</p>
-  <p *ngIf="!toDo.isCompleted" class="unfinished">Unfinished</p>
-  <button (click)="goBackToDashboard()">Back to dashboard</button>
 </div>

@@ -38,15 +38,15 @@ describe('ToDoComponent', () => {
       imports: [RouterTestingModule.withRoutes(routes)],
       schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ToDoComponent);
     component = fixture.componentInstance;
     component.toDo = new ToDo(1,
-                              "Make a backup",
-                              "Buy an external hard drive and back up the store on your computer");
+      "Make a backup",
+      "Buy an external hard drive and back up the store on your computer");
     checkbox = fixture.debugElement.nativeElement.querySelector('.mat-list-item mat-checkbox label');
     button = fixture.debugElement.nativeElement.querySelector('.mat-list-item span button');
     onChangespy = spyOn(component, 'OnChange').and.callThrough();
@@ -76,7 +76,6 @@ describe('ToDoComponent', () => {
     goToSingleViewSpy = spyOn(component, 'goToSingleView').and.callThrough();
     button.click();
     expect(goToSingleViewSpy).toHaveBeenCalled();
-
-  })
+  });
 
 });
