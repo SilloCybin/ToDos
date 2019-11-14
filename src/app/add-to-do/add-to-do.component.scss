@@ -1,1 +1,7 @@
-
+div #container{
+  display: flex;
+  justify-content: center;
+}
+div #container .mat-card{
+  align-self: center;
+}
