@@ -7,7 +7,7 @@ describe('InMemoryDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
       { provide: InMemoryDataService, useExisting: InMemoryDbService },
-      InMemoryDbService
+      InMemoryDbService,
     ]
   }));
 
@@ -15,4 +15,5 @@ describe('InMemoryDataService', () => {
     const service: InMemoryDataService = TestBed.get(InMemoryDataService);
     expect(service).toBeTruthy();
   });
+
 });
