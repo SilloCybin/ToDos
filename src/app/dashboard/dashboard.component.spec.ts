@@ -5,6 +5,8 @@ import { ToDoListComponent } from '../to-do-list/to-do-list.component';
 import { ToDoComponent } from '../to-do/to-do.component';
 import {MatCard, MatCardTitle, MatCheckbox, MatList, MatListItem, MatRipple} from '@angular/material';
 import {EntityCollectionServiceElementsFactory, EntityDispatcherFactory} from '@ngrx/data';
+import {EntityActionFactory} from 'ngrx-data';
+import {StateObservable, Store} from '@ngrx/store';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -26,7 +28,13 @@ describe('DashboardComponent', () => {
         MatCard,
         MatCardTitle
       ],
-      providers: []
+      providers: [
+        EntityCollectionServiceElementsFactory,
+        EntityDispatcherFactory,
+        EntityActionFactory,
+        Store,
+        StateObservable
+      ]
     })
     .compileComponents();
   }));

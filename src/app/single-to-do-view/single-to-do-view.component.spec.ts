@@ -1,11 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SingleToDoViewComponent } from './single-to-do-view.component';
-import {DashboardComponent} from '../dashboard/dashboard.component';
-import {RouterTestingModule} from '@angular/router/testing';
-import {MatCard, MatCardModule, MatCardTitle, MatCheckboxModule, MatList, MatListModule} from '@angular/material';
-import {ToDoListComponent} from '../to-do-list/to-do-list.component';
-import {ToDoComponent} from '../to-do/to-do.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatCardModule, MatCheckboxModule, MatListModule} from '@angular/material';
+import { ToDoListComponent } from '../to-do-list/to-do-list.component';
+import { ToDoComponent } from '../to-do/to-do.component';
+import {EntityActionFactory, EntityCollectionServiceElementsFactory, EntityDispatcherFactory} from 'ngrx-data';
+import {StateObservable, Store} from '@ngrx/store';
 
 describe('SingleToDoViewComponent', () => {
   let component: SingleToDoViewComponent;
@@ -20,12 +22,16 @@ describe('SingleToDoViewComponent', () => {
         SingleToDoViewComponent,
         DashboardComponent,
         ToDoListComponent,
-        ToDoComponent,
-        /*MatCard,
-        MatList,
-        MatCardTitle,*/
+        ToDoComponent
         ],
-      imports: [RouterTestingModule, MatCardModule, MatListModule, MatCheckboxModule]
+      imports: [RouterTestingModule, MatCardModule, MatListModule, MatCheckboxModule],
+      providers: [
+        EntityCollectionServiceElementsFactory,
+        EntityDispatcherFactory,
+        EntityActionFactory,
+        Store,
+        StateObservable
+      ]
     })
     .compileComponents();
   }));

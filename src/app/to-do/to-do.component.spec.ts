@@ -26,7 +26,15 @@ describe('ToDoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToDoComponent, DashboardComponent, SingleToDoViewComponent, MatCheckbox, MatListItem, MatList, MatRipple, MatCard ],
+      declarations: [
+        ToDoComponent,
+        DashboardComponent,
+        SingleToDoViewComponent,
+        MatCheckbox,
+        MatListItem,
+        MatList,
+        MatRipple,
+        MatCard ],
       imports: [RouterTestingModule.withRoutes(routes)],
       schemas: [NO_ERRORS_SCHEMA]
     })

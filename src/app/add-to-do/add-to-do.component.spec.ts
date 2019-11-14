@@ -4,8 +4,9 @@ import { AddToDoComponent } from './add-to-do.component';
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle, MatFormField} from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CdkObserveContent} from '@angular/cdk/observers';
-import {Router, RouterModule} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
+import {EntityActionFactory, EntityCollectionServiceElementsFactory, EntityDispatcherFactory} from 'ngrx-data';
+import {StateObservable, Store} from '@ngrx/store';
 
 describe('AddToDoComponent', () => {
   let component: AddToDoComponent;
@@ -24,7 +25,16 @@ describe('AddToDoComponent', () => {
         MatFormField,
         CdkObserveContent
       ],
-      imports: [ReactiveFormsModule, RouterTestingModule]
+      imports: [
+        ReactiveFormsModule,
+        RouterTestingModule],
+      providers: [
+        EntityCollectionServiceElementsFactory,
+        EntityDispatcherFactory,
+        EntityActionFactory,
+        Store,
+        StateObservable
+      ]
     })
     .compileComponents();
   }));
