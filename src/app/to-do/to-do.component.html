@@ -7,11 +7,9 @@
     <p mat-line *ngIf="toDo.isCompleted" class="done">Done</p>
     <p mat-line *ngIf="!toDo.isCompleted" class="unfinished">Unfinished</p>
     <span mat-line>
-      <span id="button_and_checkbox">
-        <button mat-raised-button color="accent" type="button" (click)="goToSingleView()">See details</button>
-        <mat-checkbox mat-line labelPosition="before" style="font-style: italic" (change)="OnChange()" [checked]="isChecked">Mark as Done</mat-checkbox>
-      </span>
-    </span>
+    <button mat-raised-button color="accent" type="button" (click)="goToSingleView()">See details</button>
+  </span>
+    <mat-checkbox mat-line labelPosition="before" style="font-style: italic" (change)="OnChange()" [checked]="isChecked">Mark as Done</mat-checkbox>
   </mat-card>
 </mat-list-item>
 
