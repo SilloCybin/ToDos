@@ -60,7 +60,7 @@ function mapCollectionName(name: string): string {
 function getDbData() {
   const toDo1 = new ToDo(1,
                         "Make a backup",
-                        "Buy an external hard drive and back up the store on your computer"
+                        "Buy an external hard drive and back up the data on your computer"
                         );
 
   const todo2 = new ToDo(2,
