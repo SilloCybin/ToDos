@@ -1,15 +1,14 @@
 <mat-list-item>
   <mat-card>
     <div mat-line>
-      <mat-card-title *ngIf="toDo.isCompleted" style="text-decoration: line-through">{{toDo.title}}</mat-card-title>
-      <mat-card-title *ngIf="!toDo.isCompleted">{{toDo.title}}</mat-card-title>
+      <mat-card-title [class.done_title]="toDo.isCompleted">{{toDo.title}}</mat-card-title>
     </div>
-    <p mat-line *ngIf="toDo.isCompleted" class="done">Done</p>
-    <p mat-line *ngIf="!toDo.isCompleted" class="unfinished">Unfinished</p>
+    <p mat-line *ngIf="toDo.isCompleted" class="done_status">Done</p>
+    <p mat-line *ngIf="!toDo.isCompleted" class="unfinished_status">Unfinished</p>
     <span mat-line>
       <span id="button_and_checkbox">
         <button mat-raised-button color="accent" type="button" (click)="goToSingleView()">See details</button>
-        <mat-checkbox mat-line labelPosition="before" style="font-style: italic" (change)="OnChange()" [checked]="isChecked">Mark as Done</mat-checkbox>
+        <mat-checkbox mat-line labelPosition="before" (change)="OnChange()" [checked]="isChecked">Mark as Done</mat-checkbox>
       </span>
     </span>
   </mat-card>

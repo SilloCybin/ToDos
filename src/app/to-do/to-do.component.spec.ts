@@ -1,8 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ToDoComponent } from './to-do.component';
-import {MatCard, MatCheckbox, MatList, MatListItem, MatRipple} from '@angular/material';
-import {ToDo} from '../models/ToDo';
+import {MatCard, MatCheckbox, MatList, MatListItem} from '@angular/material';
 import {RouterTestingModule} from "@angular/router/testing";
 import {Routes} from '@angular/router';
 import {DashboardComponent} from '../dashboard/dashboard.component';
@@ -33,7 +32,6 @@ describe('ToDoComponent', () => {
         MatCheckbox,
         MatListItem,
         MatList,
-        MatRipple,
         MatCard ],
       imports: [RouterTestingModule.withRoutes(routes)],
       schemas: [NO_ERRORS_SCHEMA]
@@ -44,9 +42,11 @@ describe('ToDoComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ToDoComponent);
     component = fixture.componentInstance;
-    component.toDo = new ToDo(1,
-      "Make a backup",
-      "Buy an external hard drive and back up the store on your computer");
+    component.toDo = {
+      id: 1,
+      title: "Make a backup",
+      description: "Buy an external hard drive and back up the store on your computer"
+    };
     checkbox = fixture.debugElement.nativeElement.querySelector('.mat-list-item mat-checkbox label');
     button = fixture.debugElement.nativeElement.querySelector('.mat-list-item span button');
     onChangespy = spyOn(component, 'OnChange').and.callThrough();

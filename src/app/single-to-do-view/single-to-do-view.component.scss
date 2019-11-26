@@ -1,7 +1,7 @@
-.done{
+.done_status{
   color: green;
 }
-.unfinished{
+.unfinished_status{
   color: orangered;
 }
 div #container{
@@ -14,6 +14,9 @@ div #container{
 }
 .mat-card .button{
   justify-self: center;
+}
+.done_title{
+  text-decoration: line-through
 }
 
 

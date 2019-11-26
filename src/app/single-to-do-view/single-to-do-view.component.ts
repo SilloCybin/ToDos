@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ToDo} from '../models/ToDo';
 import {ActivatedRoute, Router, ParamMap} from '@angular/router';
 import { switchMap } from 'rxjs/operators';

@@ -21,7 +21,7 @@ export class ToDoComponent implements OnInit {
   }
 
   setInitialCheckboxState() {
-    this.isChecked = this.toDo.isCompleted == true;
+    this.isChecked = this.toDo.isCompleted === true;
   }
 
   OnChange() {

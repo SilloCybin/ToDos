@@ -2,12 +2,11 @@
   <div id="container">
     <mat-card>
       <div>
-        <h3 *ngIf="toDo.isCompleted" style="text-decoration: line-through">{{toDo.title}}</h3>
-        <h3 *ngIf="!toDo.isCompleted">{{toDo.title}}</h3>
+        <h3 [class.done_title]="toDo.isCompleted">{{toDo.title}}</h3>
       </div>
       <p>{{toDo.description}}</p>
-      <p *ngIf="toDo.isCompleted" class="done">Done</p>
-      <p *ngIf="!toDo.isCompleted" class="unfinished">Unfinished</p>
+      <p *ngIf="toDo.isCompleted" class="done_status">Done</p>
+      <p *ngIf="!toDo.isCompleted" class="unfinished_status">Unfinished</p>
       <button mat-raised-button color="accent" type="button" (click)="goBackToDashboard()">Back to dashboard</button>
     </mat-card>
   </div>

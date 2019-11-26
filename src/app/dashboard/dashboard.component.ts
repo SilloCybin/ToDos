@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToDo } from 'src/app/models/ToDo';
 import { Observable } from 'rxjs';
 import { ToDoService } from '../services/to-do.service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',

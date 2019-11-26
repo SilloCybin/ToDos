@@ -36,7 +36,7 @@ export class ToDoListComponent implements OnChanges {
   checkForDateStrings(){
     for(let todo of this.toDoList){
       if(todo.isCompleted){
-        if(typeof todo.completedBy == 'string'){
+        if(typeof todo.completedBy === 'string'){
           todo.completedBy = new Date(todo.completedBy);
         }
       }

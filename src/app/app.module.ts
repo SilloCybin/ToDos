@@ -25,10 +25,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddToDoComponent } from './add-to-do/add-to-do.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
   { path: 'Dashboard', component : DashboardComponent },
   { path: 'ToDo/:id', component: SingleToDoViewComponent },
-  { path: 'AddToDo', component: AddToDoComponent}
+  { path: 'AddToDo', component: AddToDoComponent},
+  { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
+  { path: '**', redirectTo: 'Dashboard' }
 ];
 
 @NgModule({

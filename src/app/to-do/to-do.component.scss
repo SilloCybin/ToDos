@@ -1,8 +1,11 @@
-.done{
+.done_status{
   color: green;
 }
-.unfinished{
+.unfinished_status{
   color: orangered;
+}
+.done_title{
+  text-decoration: line-through;
 }
 span #button_and_checkbox{
   display: flex;
@@ -11,6 +14,7 @@ span #button_and_checkbox{
 span #button_and_checkbox .mat-checkbox{
   align-self: center;
   margin-left: auto;
+  font-style: italic;
 }
 .mat-card{
   min-width: 20%;
