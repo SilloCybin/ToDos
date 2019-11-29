@@ -7,7 +7,7 @@
       <p>{{toDo.description}}</p>
       <p *ngIf="toDo.isCompleted" class="done_status">Done</p>
       <p *ngIf="!toDo.isCompleted" class="unfinished_status">Unfinished</p>
-      <button mat-raised-button color="accent" type="button" (click)="goBackToDashboard()">Back to dashboard</button>
+      <button mat-raised-button id="goBackToDashboard" color="accent" type="button" (click)="goBackToDashboard()">Back to dashboard</button>
     </mat-card>
   </div>
 </div>

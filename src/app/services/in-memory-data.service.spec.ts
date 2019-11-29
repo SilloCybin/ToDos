@@ -7,13 +7,22 @@ describe('InMemoryDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
       { provide: InMemoryDataService, useExisting: InMemoryDbService },
-      InMemoryDbService,
+      InMemoryDbService
     ]
   }));
 
   it('should be created', () => {
     const service: InMemoryDataService = TestBed.get(InMemoryDataService);
     expect(service).toBeTruthy();
+  });
+
+  it('should load correct data info', () => {
+    const inMemoryDataService = new InMemoryDataService();
+
+    expect(inMemoryDataService.active).toEqual(true);
+    expect(inMemoryDataService.maxId).toEqual(0);
+    expect(inMemoryDataService.db).toBeDefined();
+
   });
 
 });

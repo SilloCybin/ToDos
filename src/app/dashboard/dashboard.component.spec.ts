@@ -3,41 +3,51 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardComponent } from './dashboard.component';
 import { ToDoListComponent } from '../to-do-list/to-do-list.component';
 import { ToDoComponent } from '../to-do/to-do.component';
-import {MatCard, MatCardTitle, MatCheckbox, MatList, MatListItem, MatRipple} from '@angular/material';
-import {EntityCollectionServiceElementsFactory, EntityDispatcherFactory, EntityActionFactory} from '@ngrx/data';
-import {StateObservable, Store} from '@ngrx/store';
-import {ToDoService} from '../services/to-do.service';
+import {
+  MatCardModule,
+  MatCheckbox,
+  MatFormFieldModule,
+  MatList,
+  MatListItem,
+  MatRipple
+} from '@angular/material';
 import {RouterTestingModule} from '@angular/router/testing';
+import {ToDoService} from '../services/to-do.service';
+import { Routes } from '@angular/router';
+import {AddToDoComponent} from '../add-to-do/add-to-do.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
-  let spy : any;
+  let toDoService: jasmine.SpyObj<ToDoService>;
   let button: any;
   let goToAddToDoSpy: any;
-  let toDoService: ToDoService;
-  let router: RouterTestingModule;
+
+  const routes: Routes = [
+    { path: 'AddToDo', component: AddToDoComponent},
+  ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes(routes),
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule
+      ],
       declarations: [
         DashboardComponent,
         ToDoListComponent,
         ToDoComponent,
+        AddToDoComponent,
         MatCheckbox,
         MatList,
         MatListItem,
-        MatRipple,
-        MatCard,
-        MatCardTitle
+        MatRipple
       ],
       providers: [
-        EntityCollectionServiceElementsFactory,
-        EntityDispatcherFactory,
-        EntityActionFactory,
-        Store,
-        StateObservable,
-        ToDoService
+        { provide: ToDoService, useValue: jasmine.createSpyObj('toDoService', ['getAll', 'update']) }
       ]
     })
       .compileComponents();
@@ -46,6 +56,7 @@ describe('DashboardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
+    button = fixture.debugElement.nativeElement.querySelector('#goToAddToDoButton');
     fixture.detectChanges();
   });
 
@@ -53,42 +64,16 @@ describe('DashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should fire NgOnInit on component instantiation', () => {
-    spy = spyOn(component, 'ngOnInit').and.callThrough();
-    component.ngOnInit();
-    expect(spy).toHaveBeenCalled();
+  it('should make ToDoService behave correctly', () => {
+    toDoService = TestBed.get(ToDoService);
+    toDoService.update();
+    expect(toDoService.update).toHaveBeenCalled();
   });
 
-  /*it('should make addToDo behave correctly', () => {
-    button = fixture.debugElement.nativeElement.querySelector('.div div button');
-    router = fixture.debugElement.injector.get(RouterTestingModule);
-    spy = spyOn(router, 'navigate').and.callThrough();
-    component.ngOnInit();
-    expect(spy).toHaveBeenCalled();
-  });*/
-
-  it('should make deleteToDo behave correctly', () => {
-    spy = spyOn(component, 'deleteToDo').and.callThrough();
-    component.ngOnInit();
-    expect(spy).toHaveBeenCalled();
-  });
-
-  it('should make updateToDo behave correctly', () => {
-    spy = spyOn(component, 'updateToDo').and.callThrough();
-    component.ngOnInit();
-    expect(spy).toHaveBeenCalled();
-  });
-
-  it('should make getToDos behave correctly', () => {
-    spy = spyOn(component, 'getToDos').and.callThrough();
-    component.ngOnInit();
-    expect(spy).toHaveBeenCalled();
-  });
-
-  it('should fire goToAddToDo and navigate correctly when button is pressed', () => {
-    button = fixture.debugElement.nativeElement.querySelector('.div button');
+  it('should navigate correctly on Create new To Do button click', () => {
     goToAddToDoSpy = spyOn(component, 'goToAddToDo').and.callThrough();
     button.click();
-    expect(spy).toHaveBeenCalled();
-  });
+    expect(goToAddToDoSpy).toHaveBeenCalled();
+  })
+
 });

@@ -14,15 +14,15 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { EntityDataModule } from '@ngrx/data';
-import { defaultDataServiceConfig, entityConfig} from './store/entity-metada';
-import { DefaultDataServiceConfig, NgrxDataModule} from 'ngrx-data';
+import {DefaultDataServiceConfig, EntityDataModule} from '@ngrx/data';
+import { entityConfig } from './store/entity-metada';
 
 import { InMemoryDataService } from './services/in-memory-data.service';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import { SingleToDoViewComponent } from './single-to-do-view/single-to-do-view.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AddToDoComponent } from './add-to-do/add-to-do.component';
+import {ToDoService} from './services/to-do.service';
 
 const routes: Routes = [
   { path: 'Dashboard', component : DashboardComponent },
@@ -56,7 +56,6 @@ const routes: Routes = [
     MatCardModule,
     MatInputModule,
     MatButtonModule,
-    NgrxDataModule.forRoot(entityConfig),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot(entityConfig),
@@ -64,8 +63,7 @@ const routes: Routes = [
     ReactiveFormsModule
   ],
     providers: [
-      { provide: InMemoryDataService, useExisting: InMemoryDbService },
-      { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig }
+      { provide: InMemoryDataService, useExisting: InMemoryDbService }
     ],
   bootstrap: [AppComponent],
   exports: [RouterModule]

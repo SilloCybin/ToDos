@@ -1,20 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SingleToDoViewComponent } from './single-to-do-view.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatCardModule, MatCheckboxModule, MatListModule} from '@angular/material';
 import { ToDoListComponent } from '../to-do-list/to-do-list.component';
 import { ToDoComponent } from '../to-do/to-do.component';
-import {EntityActionFactory, EntityCollectionServiceElementsFactory, EntityDispatcherFactory} from 'ngrx-data';
-import {StateObservable, Store} from '@ngrx/store';
+import { Routes } from '@angular/router';
+import { ToDoService } from '../services/to-do.service';
 
 describe('SingleToDoViewComponent', () => {
   let component: SingleToDoViewComponent;
   let fixture: ComponentFixture<SingleToDoViewComponent>;
-  let ngOnInitSpy: any;
   let goBackToDashboardSpy: any;
   let button: any;
+  let toDoService: jasmine.SpyObj<ToDoService>;
+
+  const routes: Routes = [
+    { path: 'Dashboard', component: DashboardComponent},
+  ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -24,13 +27,14 @@ describe('SingleToDoViewComponent', () => {
         ToDoListComponent,
         ToDoComponent
       ],
-      imports: [RouterTestingModule, MatCardModule, MatListModule, MatCheckboxModule],
+      imports: [
+        RouterTestingModule.withRoutes(routes),
+        MatCardModule,
+        MatListModule,
+        MatCheckboxModule
+      ],
       providers: [
-        EntityCollectionServiceElementsFactory,
-        EntityDispatcherFactory,
-        EntityActionFactory,
-        Store,
-        StateObservable
+        { provide: ToDoService, useValue: jasmine.createSpyObj('toDoService', ['getByKey']) }
       ]
     })
       .compileComponents();
@@ -39,6 +43,7 @@ describe('SingleToDoViewComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SingleToDoViewComponent);
     component = fixture.componentInstance;
+    button = fixture.debugElement.nativeElement.querySelector('#goBackToDashboard');
     fixture.detectChanges();
   });
 
@@ -46,14 +51,13 @@ describe('SingleToDoViewComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should fire ngOnInit on component instantiation', () => {
-    ngOnInitSpy = spyOn(component, 'ngOnInit').and.callThrough();
-    component.ngOnInit();
-    expect(ngOnInitSpy).toHaveBeenCalled();
+  it('should make ToDoService behave correctly', () => {
+    toDoService = TestBed.get(ToDoService);
+    toDoService.getByKey(1);
+    expect(toDoService.getByKey).toHaveBeenCalledWith(1);
   });
 
   it('should fire goBackToDashboard and navigate correctly when button is pressed', () => {
-    button = fixture.debugElement.nativeElement.querySelector('.div div button');
     goBackToDashboardSpy = spyOn(component, 'goBackToDashboard').and.callThrough();
     button.click();
     expect(goBackToDashboardSpy).toHaveBeenCalled();

@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {ToDo} from '../models/ToDo';
-import {ActivatedRoute, Router, ParamMap} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ToDo } from '../models/ToDo';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import {Observable} from 'rxjs';
-import {ToDoService} from '../services/to-do.service';
+import { Observable } from 'rxjs';
+import { ToDoService } from '../services/to-do.service';
 
 @Component({
   selector: 'app-single-to-do-view',

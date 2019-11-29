@@ -21,14 +21,6 @@ export class DashboardComponent implements OnInit {
     this.getToDos();
   }
 
-  addToDo(toDo: ToDo) {
-    this.toDoService.add(toDo);
-  }
-
-  deleteToDo(toDo: ToDo) {
-    this.toDoService.delete(toDo.id);
-  }
-
   getToDos() {
     this.toDoService.getAll();
   }

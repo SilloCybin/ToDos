@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import { ToDoComponent } from './to-do/to-do.component';
-import {MatCard, MatCardTitle, MatCheckbox, MatDivider, MatList, MatListItem, MatRipple} from '@angular/material';
+import { MatCard, MatCardTitle, MatCheckbox, MatDivider, MatList, MatListItem, MatRipple } from '@angular/material';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

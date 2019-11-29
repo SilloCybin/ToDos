@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ToDoListComponent } from './to-do-list.component';
-import {NO_ERRORS_SCHEMA, SimpleChange} from '@angular/core';
-import { ToDo } from '../models/ToDo';
-import {ToDoComponent} from '../to-do/to-do.component';
+import { SimpleChange } from '@angular/core';
+import { ToDoComponent } from '../to-do/to-do.component';
+import { MatCardModule, MatCheckboxModule, MatListModule } from '@angular/material';
 
 describe('ToDoListComponent', () => {
   let component: ToDoListComponent;
@@ -12,8 +12,15 @@ describe('ToDoListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToDoListComponent, ToDoComponent ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      imports: [
+        MatListModule,
+        MatCardModule,
+        MatCheckboxModule
+      ],
+      declarations: [
+        ToDoListComponent,
+        ToDoComponent
+      ]
     })
       .compileComponents();
   }));
@@ -122,7 +129,6 @@ describe('ToDoListComponent', () => {
 
   it('should make undefined date turn to 0 when calling getTime', () => {
     expect(component.getTime(undefined)).toEqual(0);
-
   })
 
 });

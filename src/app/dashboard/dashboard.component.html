@@ -1,6 +1,6 @@
 <div>
   <div id="container">
-    <button mat-raised-button color="accent" type="button" (click)="goToAddToDo()">Create new To Do</button>
+    <button id="goToAddToDoButton" mat-raised-button color="accent" type="button" (click)="goToAddToDo()">Create new To Do</button>
   </div>
 </div>
 <div *ngIf="todos$ | async as todos">

@@ -1,26 +1,25 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ToDoService } from './to-do.service';
-import { StoreModule } from '@ngrx/store';
-import { Actions, EffectSources } from '@ngrx/effects';
-import { EntityDataModuleWithoutEffects } from '@ngrx/data';
-import { entityConfig } from '../store/entity-metada';
-import { HttpClientModule } from '@angular/common/http';
-import { DefaultDataServiceFactory, NgrxDataModule } from 'ngrx-data';
+import { ReducerManager, ReducerManagerDispatcher, Store, StoreModule } from '@ngrx/store';
+import { EntityActionFactory, EntityCollectionServiceElementsFactory, EntityDataModuleWithoutEffects, EntityDispatcherFactory } from '@ngrx/data';
+import { Actions } from '@ngrx/effects';
 
 describe('ToDoService', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
-      Actions,
-      DefaultDataServiceFactory,
-      EffectSources
+      EntityCollectionServiceElementsFactory,
+      EntityDispatcherFactory,
+      EntityActionFactory,
+      Store,
+      ReducerManager,
+      ReducerManagerDispatcher,
+      Actions
     ],
     imports: [
       EntityDataModuleWithoutEffects,
-      NgrxDataModule.forRoot(entityConfig),
-      StoreModule.forRoot({}),
-      HttpClientModule
+      StoreModule.forRoot({})
     ]
   }));
 
