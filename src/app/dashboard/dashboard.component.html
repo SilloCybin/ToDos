@@ -4,5 +4,5 @@
   </div>
 </div>
 <div *ngIf="todos$ | async as todos">
-  <app-to-do-list [toDoList]="todos" (update)="updateToDo($event)"></app-to-do-list>
+  <app-to-do-list [toDoList]="todos" (update)="updateToDo($event)" (delete)="deleteToDo($event)"></app-to-do-list>
 </div>

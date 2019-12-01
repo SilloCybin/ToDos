@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ToDoComponent } from './to-do.component';
-import { MatCardModule, MatCheckbox, MatList, MatListItem, MatRipple} from '@angular/material';
+import {MatCardModule, MatCheckbox, MatDialog, MatDialogModule, MatIconModule, MatList, MatListItem, MatRipple} from '@angular/material';
 import { RouterTestingModule } from "@angular/router/testing";
 import { Routes } from '@angular/router';
 import { DashboardComponent } from '../dashboard/dashboard.component';
@@ -34,8 +34,11 @@ describe('ToDoComponent', () => {
       ],
       imports: [
         RouterTestingModule.withRoutes(routes),
-        MatCardModule
-      ]
+        MatCardModule,
+        MatIconModule,
+        MatDialogModule
+      ],
+      providers: [MatDialog]
     })
       .compileComponents();
   }));

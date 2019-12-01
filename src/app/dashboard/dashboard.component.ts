@@ -29,6 +29,10 @@ export class DashboardComponent implements OnInit {
     this.toDoService.update(toDo);
   }
 
+  deleteToDo(toDo: ToDo){
+    this.toDoService.delete(toDo);
+  }
+
   goToAddToDo(){
     this.router.navigate(['/AddToDo/']);
   }

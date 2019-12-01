@@ -6,7 +6,7 @@ import { ToDoComponent } from '../to-do/to-do.component';
 import {
   MatCardModule,
   MatCheckbox,
-  MatFormFieldModule,
+  MatFormFieldModule, MatIconModule,
   MatList,
   MatListItem,
   MatRipple
@@ -34,7 +34,8 @@ describe('DashboardComponent', () => {
         RouterTestingModule.withRoutes(routes),
         ReactiveFormsModule,
         MatCardModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatIconModule
       ],
       declarations: [
         DashboardComponent,

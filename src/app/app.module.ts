@@ -5,11 +5,11 @@ import { HttpClientInMemoryWebApiModule, InMemoryDbService } from 'angular-in-me
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ToDoComponent } from './to-do/to-do.component';
+import {DialogDeleteToDo, ToDoComponent} from './to-do/to-do.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule } from '@angular/material/list';
-import { MatButtonModule, MatCardModule, MatCheckboxModule, MatInputModule } from '@angular/material';
+import {MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatIconModule, MatInputModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { EffectsModule } from '@ngrx/effects';
@@ -40,7 +40,9 @@ const routes: Routes = [
     ToDoListComponent,
     SingleToDoViewComponent,
     AddToDoComponent,
+    DialogDeleteToDo
   ],
+  entryComponents: [DialogDeleteToDo],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -60,11 +62,13 @@ const routes: Routes = [
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot(entityConfig),
     RouterModule.forRoot(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule,
+    MatDialogModule
   ],
-    providers: [
-      { provide: InMemoryDataService, useExisting: InMemoryDbService }
-    ],
+  providers: [
+    { provide: InMemoryDataService, useExisting: InMemoryDbService }
+  ],
   bootstrap: [AppComponent],
   exports: [RouterModule]
 })

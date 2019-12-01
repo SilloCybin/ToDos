@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ToDoListComponent } from './to-do-list.component';
 import { SimpleChange } from '@angular/core';
 import { ToDoComponent } from '../to-do/to-do.component';
-import { MatCardModule, MatCheckboxModule, MatListModule } from '@angular/material';
+import {MatCardModule, MatCheckboxModule, MatIconModule, MatListModule} from '@angular/material';
 
 describe('ToDoListComponent', () => {
   let component: ToDoListComponent;
@@ -15,7 +15,8 @@ describe('ToDoListComponent', () => {
       imports: [
         MatListModule,
         MatCardModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatIconModule
       ],
       declarations: [
         ToDoListComponent,

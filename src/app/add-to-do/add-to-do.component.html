@@ -1,27 +1,25 @@
 <div>
-<div id="container">
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Add a ToDo</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form [formGroup]="addToDoForm" (ngSubmit)="addToDo(addToDoForm)">
-      <div class="editfields">
-        <div>
-          <mat-form-field>
-            <input matInput id="title_input" formControlName="title" placeholder="title" #title>
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field>
-            <textarea matInput formControlName="description" placeholder="description" #description></textarea>
-          </mat-form-field>
-        </div>
-      </div>
-      <button id="cancel_button" mat-raised-button color="accent" type="button" (click)="goBackToDashboard()">Cancel</button>
-      <button id="submit_button" mat-raised-button color="primary" type="submit" [disabled]="addToDoForm.pristine || addToDoForm.invalid">Add To Do</button>
-    </form>
-  </mat-card-content>
-</mat-card>
-</div>
+  <div id="container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Add a ToDo</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="addToDoForm" (ngSubmit)="addToDo(addToDoForm)">
+          <div>
+            <mat-form-field>
+              <input matInput id="title_input" formControlName="title" placeholder="title" #title>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <textarea matInput formControlName="description" placeholder="description" #description></textarea>
+            </mat-form-field>
+          </div>
+          <button id="cancel_button" mat-raised-button color="accent" type="button" (click)="goBackToDashboard()">Cancel</button>
+          <button id="submit_button" mat-raised-button color="primary" type="submit" [disabled]="addToDoForm.pristine || addToDoForm.invalid">Add To Do</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

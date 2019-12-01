@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SingleToDoViewComponent } from './single-to-do-view.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatCardModule, MatCheckboxModule, MatListModule} from '@angular/material';
+import {MatCardModule, MatCheckboxModule, MatIconModule, MatListModule} from '@angular/material';
 import { ToDoListComponent } from '../to-do-list/to-do-list.component';
 import { ToDoComponent } from '../to-do/to-do.component';
 import { Routes } from '@angular/router';
@@ -31,7 +31,8 @@ describe('SingleToDoViewComponent', () => {
         RouterTestingModule.withRoutes(routes),
         MatCardModule,
         MatListModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatIconModule
       ],
       providers: [
         { provide: ToDoService, useValue: jasmine.createSpyObj('toDoService', ['getByKey']) }

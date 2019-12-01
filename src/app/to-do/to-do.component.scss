@@ -12,11 +12,22 @@ span #button_and_checkbox{
   flex-direction: row;
 }
 span #button_and_checkbox .mat-checkbox{
-  align-self: center;
+  align-self: flex-end;
   margin-left: auto;
   font-style: italic;
 }
 .mat-card{
-  min-width: 20%;
+  width: 30%;
 }
+div #container{
+  display: flex;
+  flex-direction: row;
+}
+div #container .mat-button{
+  margin-left: auto;
+}
+.on-hover{
+  color: red;
+}
+
 

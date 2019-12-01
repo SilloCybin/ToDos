@@ -1,7 +1,17 @@
 div #container{
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
-div #container .mat-card{
-  align-self: center;
+div #container .mat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
 }
+div #container .mat-card .mat-card-header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddToDoComponent } from './add-to-do.component';
-import { MatCardModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatListModule } from '@angular/material';
+import {MatCardModule, MatCheckboxModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule} from '@angular/material';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToDoService } from '../services/to-do.service';
@@ -43,6 +43,7 @@ describe('AddToDoComponent', () => {
         MatCheckboxModule,
         MatCardModule,
         MatInputModule,
+        MatIconModule,
         BrowserAnimationsModule,
         RouterTestingModule.withRoutes(routes)
       ],

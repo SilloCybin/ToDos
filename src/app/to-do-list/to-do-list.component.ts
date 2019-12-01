@@ -10,7 +10,8 @@ import { ToDo } from '../models/ToDo';
 export class ToDoListComponent implements OnChanges {
 
   @Input() toDoList: ToDo[];
-  @Output() update = new EventEmitter<ToDo>();
+  @Output() update: EventEmitter<ToDo> = new EventEmitter<ToDo>();
+  @Output() delete: EventEmitter<ToDo> = new EventEmitter<ToDo>();
 
   constructor() { }
 
@@ -21,6 +22,10 @@ export class ToDoListComponent implements OnChanges {
 
   relayUpdate($event){
     this.update.emit($event);
+  }
+
+  relayDelete($event){
+    this.delete.emit($event);
   }
 
   sortToDos() {
