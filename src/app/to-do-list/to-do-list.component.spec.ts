@@ -3,12 +3,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ToDoListComponent } from './to-do-list.component';
 import { SimpleChange } from '@angular/core';
 import { ToDoComponent } from '../to-do/to-do.component';
-import {MatCardModule, MatCheckboxModule, MatIconModule, MatListModule} from '@angular/material';
+import { MatCardModule, MatCheckboxModule, MatIconModule, MatListModule } from '@angular/material';
 
 describe('ToDoListComponent', () => {
-  let component: ToDoListComponent;
   let fixture: ComponentFixture<ToDoListComponent>;
-  let spy : any;
+  let component: ToDoListComponent;
+  let spy: any;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -24,13 +24,14 @@ describe('ToDoListComponent', () => {
       ]
     })
       .compileComponents();
-  }));
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(ToDoListComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture.whenStable().then(
+      () => {
+        fixture.detectChanges();
+      }
+    );
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -102,19 +103,6 @@ describe('ToDoListComponent', () => {
     expect(component.toDoList[1].completedBy).toEqual(jasmine.any(Date));
   });
 
-  it('should make relayUpdate() behave correctly', () => {
-    spy = spyOn(component, 'relayUpdate').and.callThrough();
-    const todo7 = {
-      id: 7,
-      title: "Do the ToDo exercise",
-      description: "Create the project, develop, and make unit tests"
-    };
-    component.relayUpdate(todo7);
-    expect(spy).toHaveBeenCalled();
-
-    expect(component).toBeTruthy();
-  });
-
   it('should change todo.completedBy of type datestring into type date', () =>{
     const todo8 = {
       id: 8,
@@ -130,6 +118,6 @@ describe('ToDoListComponent', () => {
 
   it('should make undefined date turn to 0 when calling getTime', () => {
     expect(component.getTime(undefined)).toEqual(0);
-  })
+  });
 
 });

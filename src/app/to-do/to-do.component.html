@@ -3,7 +3,7 @@
     <div>
       <div mat-line id="container">
         <mat-card-title [class.done_title]="toDo.isCompleted">{{(toDo.title.length>22) ? (toDo.title | slice:0:22)+'...' : toDo.title}}</mat-card-title>
-        <button mat-button (mouseenter)="onHover()" (mouseleave)="onHover()" (click)="openDialog()">
+        <button mat-button id="delete_button" (mouseenter)="onHover()" (mouseleave)="onHover()" (click)="openDialog()">
           <mat-icon [class.on-hover]="isOverIcon">delete_forever</mat-icon>
         </button>
       </div>

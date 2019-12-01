@@ -65,6 +65,18 @@ describe('DashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should call onHover on mouseenter and mouseleave', () => {
+    const isOverIconTest = component.isOverIcon;
+    let onHoverSpy = spyOn(component, 'onHover').and.callThrough();
+    let goToAddToDoButton = fixture.nativeElement.querySelector('#goToAddToDoButton');
+    let mouseenter = new Event('mouseenter');
+    let mouseleave = new Event('mouseleave');
+    goToAddToDoButton.dispatchEvent(mouseenter);
+    goToAddToDoButton.dispatchEvent(mouseleave);
+    expect(onHoverSpy).toHaveBeenCalledTimes(2);
+    expect(component.isOverIcon).toEqual(isOverIconTest);
+  });
+
   it('should make ToDoService behave correctly', () => {
     toDoService = TestBed.get(ToDoService);
     toDoService.update();

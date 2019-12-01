@@ -7,6 +7,8 @@ import { Routes } from '@angular/router';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { SingleToDoViewComponent } from '../single-to-do-view/single-to-do-view.component';
 import { ToDoListComponent } from '../to-do-list/to-do-list.component';
+import {By} from '@angular/platform-browser';
+import {of} from 'rxjs';
 
 describe('ToDoComponent', () => {
   let component: ToDoComponent;
@@ -80,6 +82,46 @@ describe('ToDoComponent', () => {
     goToSingleViewSpy = spyOn(component, 'goToSingleView').and.callThrough();
     button.click();
     expect(goToSingleViewSpy).toHaveBeenCalled();
+  });
+
+  it('should call onHover on mouseenter and mouseleave', () => {
+    const isOverIconTest = component.isOverIcon;
+    let onHoverSpy = spyOn(component, 'onHover').and.callThrough();
+    let delete_button = fixture.nativeElement.querySelector('#delete_button');
+    let mouseenter = new Event('mouseenter');
+    let mouseleave = new Event('mouseleave');
+    delete_button.dispatchEvent(mouseenter);
+    delete_button.dispatchEvent(mouseleave);
+    expect(onHoverSpy).toHaveBeenCalledTimes(2);
+    expect(component.isOverIcon).toEqual(isOverIconTest);
+  });
+
+  it('should openDialog() when delete_button is pressed then call onDelete() when yes_button is pressed', () => {
+    let openDialogSpy = spyOn(component, 'openDialog').and.callThrough();
+    let delete_button = fixture.nativeElement.querySelector('#delete_button');
+    delete_button.click();
+    expect(openDialogSpy).toHaveBeenCalled();
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      let onDeleteSpy = spyOn(component, 'onDelete').and.callThrough();
+      let yes_button = fixture.nativeElement.querySelector('#yes_button');
+      yes_button.click();
+      expect(onDeleteSpy).toHaveBeenCalled();
+    });
+  });
+
+  it('should openDialog() when delete_button is pressed then not call onDelete() when no_button is pressed', () => {
+    let openDialogSpy = spyOn(component, 'openDialog').and.callThrough();
+    let delete_button = fixture.nativeElement.querySelector('#delete_button');
+    delete_button.click();
+    expect(openDialogSpy).toHaveBeenCalled();
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      let onDeleteSpy = spyOn(component, 'onDelete').and.callThrough();
+      let no_button = fixture.nativeElement.querySelector('#no_button');
+      no_button.click();
+      expect(onDeleteSpy).not.toHaveBeenCalled();
+    });
   });
 
 });
