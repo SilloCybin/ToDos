@@ -1,6 +1,6 @@
 <div>
   <div id="container">
-    <button id="goToAddToDoButton" mat-raised-button color="accent" type="button" (click)="goToAddToDo()">Create new To Do</button>
+    <button (mouseenter)="onHover()" (mouseleave)="onHover()" id="goToAddToDoButton" mat-raised-button color="accent" type="button" (click)="goToAddToDo()">Create new To Do <mat-icon [class.on-hover]="isOverIcon" >add_box</mat-icon></button>
   </div>
 </div>
 <div *ngIf="todos$ | async as todos">

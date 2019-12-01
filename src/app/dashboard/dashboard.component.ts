@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
 
   todos$: Observable<ToDo[]>;
+  isOverIcon: boolean = false;
 
   constructor(private toDoService: ToDoService, private router: Router) {
     this.todos$ = toDoService.entities$;
@@ -35,6 +36,10 @@ export class DashboardComponent implements OnInit {
 
   goToAddToDo(){
     this.router.navigate(['/AddToDo/']);
+  }
+
+  onHover() {
+    this.isOverIcon = !this.isOverIcon;
   }
 
 }
