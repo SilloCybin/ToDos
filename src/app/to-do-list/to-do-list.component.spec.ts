@@ -1,9 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ToDoListComponent } from './to-do-list.component';
-import { SimpleChange } from '@angular/core';
-import { ToDoComponent } from '../to-do/to-do.component';
-import { MatCardModule, MatCheckboxModule, MatIconModule, MatListModule } from '@angular/material';
+import {DebugElement, SimpleChange} from '@angular/core';
+import {DialogDeleteToDo, ToDoComponent} from '../to-do/to-do.component';
+import {MatCardModule, MatCheckboxModule, MatDialogModule, MatIconModule, MatListModule} from '@angular/material';
+import {By} from '@angular/platform-browser';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('ToDoListComponent', () => {
   let fixture: ComponentFixture<ToDoListComponent>;
@@ -16,25 +18,49 @@ describe('ToDoListComponent', () => {
         MatListModule,
         MatCardModule,
         MatCheckboxModule,
-        MatIconModule
+        MatIconModule,
+        MatDialogModule,
+        RouterTestingModule
       ],
       declarations: [
         ToDoListComponent,
-        ToDoComponent
+        ToDoComponent,
+        DialogDeleteToDo
       ]
     })
       .compileComponents();
     fixture = TestBed.createComponent(ToDoListComponent);
     component = fixture.componentInstance;
-    fixture.whenStable().then(
-      () => {
-        fixture.detectChanges();
-      }
-    );
   }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should make relayUpdate behave correctly', () => {
+    const relayUpdateSpy = spyOn(component, 'relayUpdate').and.callThrough();
+    component.toDoList = [
+      {
+        id: 1,
+        title: "Make a backup",
+        description: "Buy an external hard drive and back up the data on your computer"
+      },
+      {
+        id: 2,
+        title: "Upgrade computer",
+        description: "Go see an expert, make him upgrade your RAM, change your computer's hard drive for an SSD one " +
+          "and change its battery"
+      },
+      {
+        id: 3,
+        title: "Do the ToDo exercise",
+        description: "Create the project, develop, and make unit tests"
+      }
+    ];
+    fixture.detectChanges();
+    const checkbox = fixture.debugElement.nativeElement.querySelectorAll('app-to-do mat-checkbox')[0];
+    checkbox.dispatchEvent(new Event('change'));
+    expect(relayUpdateSpy).toHaveBeenCalled();
   });
 
   it('should fire ngOnChanges on new toDoList value', () => {
@@ -93,14 +119,14 @@ describe('ToDoListComponent', () => {
 
     let mockToDoList2 = [todo4, todo5, todo6];
 
-    component.toDoList = mockToDoList1;
     spy = spyOn(component, 'ngOnChanges').and.callThrough();
+
+    component.toDoList = mockToDoList1;
     component.ngOnChanges({
       toDoList: new SimpleChange(mockToDoList1, mockToDoList2, false)
     });
     fixture.detectChanges();
     expect(spy).toHaveBeenCalled();
-    expect(component.toDoList[1].completedBy).toEqual(jasmine.any(Date));
   });
 
   it('should change todo.completedBy of type datestring into type date', () =>{
