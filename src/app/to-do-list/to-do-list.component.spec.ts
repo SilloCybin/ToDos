@@ -60,6 +60,7 @@ describe('ToDoListComponent', () => {
     fixture.detectChanges();
     const checkbox = fixture.debugElement.nativeElement.querySelectorAll('app-to-do mat-checkbox')[0];
     checkbox.dispatchEvent(new Event('change'));
+    //checkbox.click() doesn't fire toDoListComponent's relayUpdate() method... But checkbox.dispatchEvent() does
     expect(relayUpdateSpy).toHaveBeenCalled();
   });
 

@@ -52,7 +52,6 @@ export class ToDoComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogDeleteToDo);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if(result){
         this.onDelete();
       }
@@ -60,7 +59,7 @@ export class ToDoComponent implements OnInit {
   }
 }
 
-  // Delete Dialog Component
+// Delete Dialog Component
 
 @Component({
   selector: 'dialog-delete-to-do',

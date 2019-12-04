@@ -7,8 +7,6 @@ import { Routes } from '@angular/router';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { SingleToDoViewComponent } from '../single-to-do-view/single-to-do-view.component';
 import { ToDoListComponent } from '../to-do-list/to-do-list.component';
-import {By} from '@angular/platform-browser';
-import {of} from 'rxjs';
 
 describe('ToDoComponent', () => {
   let component: ToDoComponent;
@@ -103,11 +101,11 @@ describe('ToDoComponent', () => {
     expect(openDialogSpy).toHaveBeenCalled();
     fixture.whenStable().then(() => {
       fixture.detectChanges();
-      let onDeleteSpy = spyOn(component, 'onDelete').and.callThrough();
-      let yes_button = fixture.nativeElement.querySelector('#yes_button');
-      yes_button.click();
-      expect(onDeleteSpy).toHaveBeenCalled();
     });
+    let onDeleteSpy = spyOn(component, 'onDelete').and.callThrough();
+    let yes_button = fixture.nativeElement.querySelector('dialog-delete-to-do #yes_button');
+    yes_button.click();
+    expect(onDeleteSpy).toHaveBeenCalled();
   });
 
   it('should openDialog() when delete_button is pressed then not call onDelete() when no_button is pressed', () => {
