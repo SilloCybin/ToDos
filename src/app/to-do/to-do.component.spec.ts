@@ -1,12 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ToDoComponent } from './to-do.component';
-import {MatCardModule, MatCheckbox, MatDialog, MatDialogModule, MatIconModule, MatList, MatListItem, MatRipple} from '@angular/material';
+import {DialogDeleteToDo, ToDoComponent} from './to-do.component';
+import {MatCardModule, MatCheckbox, MatDialogModule, MatIconModule, MatList, MatListItem, MatRipple} from '@angular/material';
 import { RouterTestingModule } from "@angular/router/testing";
 import { Routes } from '@angular/router';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { SingleToDoViewComponent } from '../single-to-do-view/single-to-do-view.component';
 import { ToDoListComponent } from '../to-do-list/to-do-list.component';
+import {of} from 'rxjs';
+
+export class MatDialogMock {
+  open() {
+    return {
+      afterClosed: () => of({action: true})
+    };
+  }
+}
 
 describe('ToDoComponent', () => {
   let component: ToDoComponent;
@@ -38,7 +47,9 @@ describe('ToDoComponent', () => {
         MatIconModule,
         MatDialogModule
       ],
-      providers: [MatDialog]
+      providers: [
+        {provide: DialogDeleteToDo, useClass: MatDialogMock}
+      ]
     })
       .compileComponents();
   }));
@@ -83,43 +94,31 @@ describe('ToDoComponent', () => {
   });
 
   it('should call onHover on mouseenter and mouseleave', () => {
-    const isOverIconTest = component.isOverIcon;
-    let onHoverSpy = spyOn(component, 'onHover').and.callThrough();
+    const isOverIconTest = component.isOverDeleteIcon;
+    let onHoverSpy = spyOn(component, 'onDeleteHover').and.callThrough();
     let delete_button = fixture.nativeElement.querySelector('#delete_button');
     let mouseenter = new Event('mouseenter');
     let mouseleave = new Event('mouseleave');
     delete_button.dispatchEvent(mouseenter);
     delete_button.dispatchEvent(mouseleave);
     expect(onHoverSpy).toHaveBeenCalledTimes(2);
-    expect(component.isOverIcon).toEqual(isOverIconTest);
+    expect(component.isOverDeleteIcon).toEqual(isOverIconTest);
+  });
+
+  it('should openDialog() when delete_button is pressed', () => {
+    let openDialogSpy = spyOn(component, 'openDialog').and.callThrough();
+    let delete_button = fixture.nativeElement.querySelector('#delete_button');
+    delete_button.click();
+    expect(openDialogSpy).toHaveBeenCalled();
   });
 
   it('should openDialog() when delete_button is pressed then call onDelete() when yes_button is pressed', () => {
-    let openDialogSpy = spyOn(component, 'openDialog').and.callThrough();
+    let onDeleteSpy = spyOn(component, 'onDelete');
     let delete_button = fixture.nativeElement.querySelector('#delete_button');
     delete_button.click();
-    expect(openDialogSpy).toHaveBeenCalled();
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-    });
-    let onDeleteSpy = spyOn(component, 'onDelete').and.callThrough();
-    let yes_button = fixture.nativeElement.querySelector('dialog-delete-to-do #yes_button');
-    yes_button.click();
+    fixture.detectChanges();
     expect(onDeleteSpy).toHaveBeenCalled();
-  });
 
-  it('should openDialog() when delete_button is pressed then not call onDelete() when no_button is pressed', () => {
-    let openDialogSpy = spyOn(component, 'openDialog').and.callThrough();
-    let delete_button = fixture.nativeElement.querySelector('#delete_button');
-    delete_button.click();
-    expect(openDialogSpy).toHaveBeenCalled();
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-      let onDeleteSpy = spyOn(component, 'onDelete').and.callThrough();
-      let no_button = fixture.nativeElement.querySelector('#no_button');
-      no_button.click();
-      expect(onDeleteSpy).not.toHaveBeenCalled();
-    });
   });
 
 });

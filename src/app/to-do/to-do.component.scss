@@ -21,13 +21,13 @@ span #button_and_checkbox .mat-checkbox{
 }
 div #container{
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
 }
-div #container .mat-button{
-  margin-left: auto;
-}
-.on-hover{
-  color: red;
+.on-delete-hover{
+   color: red;
+ }
+.on-edit-hover{
+  color: darkgreen;
 }
 
 

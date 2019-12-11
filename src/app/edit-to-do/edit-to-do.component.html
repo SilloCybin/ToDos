@@ -1,0 +1,27 @@
+<div *ngIf="todo$ | async as toDo">
+  <div>
+    <div id="container">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Edit ToDo</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]="editToDoForm" (ngSubmit)="editToDo(editToDoForm)">
+            <div>
+              <mat-form-field>
+                <input matInput [(ngModel)]="toDo.title" id="title_input" formControlName="title" placeholder="title" #title>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <textarea matInput [(ngModel)]="toDo.description" formControlName="description" placeholder="description" #description></textarea>
+              </mat-form-field>
+            </div>
+            <button id="cancel_button" mat-raised-button color="accent" type="button" (click)="goBackToDashboard()">Cancel</button>
+            <button id="submit_button" mat-raised-button color="primary" type="submit" [disabled]="editToDoForm.pristine || editToDoForm.invalid">Save Changes</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

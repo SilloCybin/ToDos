@@ -17,7 +17,7 @@ export class AddToDoComponent implements OnInit {
       id: [],
       title: ['', Validators.required],
       description:['']
-    })
+    });
   }
 
   ngOnInit(){

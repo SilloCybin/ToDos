@@ -12,7 +12,6 @@ import { ToDoService } from '../services/to-do.service';
 })
 export class SingleToDoViewComponent implements OnInit {
 
-  id: number;
   todo$: Observable<ToDo>;
 
   constructor(private route: ActivatedRoute, private router: Router, private toDoService: ToDoService) { }

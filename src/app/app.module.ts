@@ -14,7 +14,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import {DefaultDataServiceConfig, EntityDataModule} from '@ngrx/data';
+import { EntityDataModule} from '@ngrx/data';
 import { entityConfig } from './store/entity-metada';
 
 import { InMemoryDataService } from './services/in-memory-data.service';
@@ -22,11 +22,12 @@ import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import { SingleToDoViewComponent } from './single-to-do-view/single-to-do-view.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AddToDoComponent } from './add-to-do/add-to-do.component';
-import {ToDoService} from './services/to-do.service';
+import { EditToDoComponent } from './edit-to-do/edit-to-do.component';
 
 const routes: Routes = [
   { path: 'Dashboard', component : DashboardComponent },
   { path: 'ToDo/:id', component: SingleToDoViewComponent },
+  { path: 'EditToDo/:id', component: EditToDoComponent},
   { path: 'AddToDo', component: AddToDoComponent},
   { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'Dashboard' }
@@ -40,7 +41,8 @@ const routes: Routes = [
     ToDoListComponent,
     SingleToDoViewComponent,
     AddToDoComponent,
-    DialogDeleteToDo
+    DialogDeleteToDo,
+    EditToDoComponent
   ],
   entryComponents: [DialogDeleteToDo],
   imports: [

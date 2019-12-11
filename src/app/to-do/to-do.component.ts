@@ -14,7 +14,8 @@ export class ToDoComponent implements OnInit {
   @Output() update: EventEmitter<ToDo> = new EventEmitter<ToDo>();
   @Output() delete: EventEmitter<ToDo> = new EventEmitter<ToDo>();
   isChecked: boolean;
-  isOverIcon: boolean = false;
+  isOverDeleteIcon = false;
+  isOverEditIcon = false;
 
   constructor(private router: Router, public dialog: MatDialog) {
   }
@@ -41,8 +42,16 @@ export class ToDoComponent implements OnInit {
     this.router.navigate(['/ToDo/', this.toDo.id]);
   }
 
-  onHover() {
-    this.isOverIcon = !this.isOverIcon;
+  goToEditToDo(){
+    this.router.navigate(['/EditToDo/', this.toDo.id]);
+  }
+
+  onDeleteHover() {
+    this.isOverDeleteIcon = !this.isOverDeleteIcon;
+  }
+
+  onEditHover(){
+    this.isOverEditIcon = !this.isOverEditIcon;
   }
 
   onDelete() {
@@ -58,6 +67,7 @@ export class ToDoComponent implements OnInit {
     });
   }
 }
+
 
 // Delete Dialog Component
 
