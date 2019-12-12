@@ -1,13 +1,25 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import {DialogDeleteToDo, ToDoComponent} from './to-do.component';
-import {MatCardModule, MatCheckbox, MatDialogModule, MatIconModule, MatList, MatListItem, MatRipple} from '@angular/material';
+import {
+  MatCardModule,
+  MatCardTitle,
+  MatCheckbox,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatList,
+  MatListItem,
+  MatRipple
+} from '@angular/material';
 import { RouterTestingModule } from "@angular/router/testing";
 import { Routes } from '@angular/router';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { SingleToDoViewComponent } from '../single-to-do-view/single-to-do-view.component';
 import { ToDoListComponent } from '../to-do-list/to-do-list.component';
 import {of} from 'rxjs';
+import {EditToDoComponent} from '../edit-to-do/edit-to-do.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 export class MatDialogMock {
   open() {
@@ -22,11 +34,14 @@ describe('ToDoComponent', () => {
   let fixture: ComponentFixture<ToDoComponent>;
   let onChangeSpy: any;
   let goToSingleViewSpy: any;
+  let goToEditToDoSpy: any;
   let checkbox: any;
-  let button: any;
+  let goToSingleToDoViewButton: any;
+  let goToEditToDoButton: any;
 
   const routes: Routes = [
     { path: 'ToDo/:id', component: SingleToDoViewComponent },
+    { path: 'EditToDo/:id', component: EditToDoComponent }
   ];
 
   beforeEach(async(() => {
@@ -36,6 +51,7 @@ describe('ToDoComponent', () => {
         DashboardComponent,
         SingleToDoViewComponent,
         ToDoListComponent,
+        EditToDoComponent,
         MatCheckbox,
         MatListItem,
         MatList,
@@ -45,7 +61,9 @@ describe('ToDoComponent', () => {
         RouterTestingModule.withRoutes(routes),
         MatCardModule,
         MatIconModule,
-        MatDialogModule
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatFormFieldModule
       ],
       providers: [
         {provide: DialogDeleteToDo, useClass: MatDialogMock}
@@ -63,7 +81,8 @@ describe('ToDoComponent', () => {
       description: "Buy an external hard drive and back up the store on your computer"
     };
     checkbox = fixture.debugElement.nativeElement.querySelector('.mat-list-item mat-checkbox label');
-    button = fixture.debugElement.nativeElement.querySelector('.mat-list-item span span button');
+    goToSingleToDoViewButton = fixture.debugElement.nativeElement.querySelector('.mat-list-item span span button');
+    goToEditToDoButton = fixture.debugElement.nativeElement.querySelector('#edit_button');
     onChangeSpy = spyOn(component, 'OnChange').and.callThrough();
     fixture.detectChanges();
   });
@@ -89,11 +108,18 @@ describe('ToDoComponent', () => {
 
   it('should take user to singleToDoViewComponent', () => {
     goToSingleViewSpy = spyOn(component, 'goToSingleView').and.callThrough();
-    button.click();
+    goToSingleToDoViewButton.click();
     expect(goToSingleViewSpy).toHaveBeenCalled();
   });
 
-  it('should call onHover on mouseenter and mouseleave', () => {
+  it('should take user to editToDoComponent', () => {
+    goToEditToDoSpy = spyOn(component, 'goToEditToDo').and.callThrough();
+    goToEditToDoButton.click();
+    expect(goToEditToDoSpy).toHaveBeenCalled();
+  });
+
+
+  it('should call onHover on mouseenter and mouseleave for delete_button', () => {
     const isOverIconTest = component.isOverDeleteIcon;
     let onHoverSpy = spyOn(component, 'onDeleteHover').and.callThrough();
     let delete_button = fixture.nativeElement.querySelector('#delete_button');
@@ -105,20 +131,23 @@ describe('ToDoComponent', () => {
     expect(component.isOverDeleteIcon).toEqual(isOverIconTest);
   });
 
+  it('should call onHover on mouseenter and mouseleave for edit_button', () => {
+    const isOverIconTest = component.isOverEditIcon;
+    let onHoverSpy = spyOn(component, 'onEditHover').and.callThrough();
+    let edit_button = fixture.nativeElement.querySelector('#edit_button');
+    let mouseenter = new Event('mouseenter');
+    let mouseleave = new Event('mouseleave');
+    edit_button.dispatchEvent(mouseenter);
+    edit_button.dispatchEvent(mouseleave);
+    expect(onHoverSpy).toHaveBeenCalledTimes(2);
+    expect(component.isOverEditIcon).toEqual(isOverIconTest);
+  });
+
   it('should openDialog() when delete_button is pressed', () => {
     let openDialogSpy = spyOn(component, 'openDialog').and.callThrough();
     let delete_button = fixture.nativeElement.querySelector('#delete_button');
     delete_button.click();
     expect(openDialogSpy).toHaveBeenCalled();
-  });
-
-  it('should openDialog() when delete_button is pressed then call onDelete() when yes_button is pressed', () => {
-    let onDeleteSpy = spyOn(component, 'onDelete');
-    let delete_button = fixture.nativeElement.querySelector('#delete_button');
-    delete_button.click();
-    fixture.detectChanges();
-    expect(onDeleteSpy).toHaveBeenCalled();
-
   });
 
 });

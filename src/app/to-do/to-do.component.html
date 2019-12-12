@@ -2,15 +2,15 @@
   <mat-card>
     <div>
       <div mat-line id="container">
-        <mat-card-title [class.done_title]="toDo.isCompleted">{{(toDo.title.length>22) ? (toDo.title | slice:0:22)+'...' : toDo.title}}</mat-card-title>
-        <div>
-          <button mat-button id="update_button" (mouseenter)="onEditHover()" (mouseleave)="onEditHover()" (click)="goToEditToDo()">
+        <mat-card-title [class.done_title]="toDo.isCompleted">{{(toDo.title.length>19) ? (toDo.title | slice:0:19)+'...' : toDo.title}}</mat-card-title>
+        <span>
+          <button mat-button id="edit_button" (mouseenter)="onEditHover()" (mouseleave)="onEditHover()" (click)="goToEditToDo()">
             <mat-icon [class.on-edit-hover]="isOverEditIcon">edit</mat-icon>
           </button>
           <button mat-button id="delete_button" (mouseenter)="onDeleteHover()" (mouseleave)="onDeleteHover()" (click)="openDialog()">
             <mat-icon [class.on-delete-hover]="isOverDeleteIcon">delete_forever</mat-icon>
           </button>
-        </div>
+        </span>
       </div>
       <p mat-line *ngIf="toDo.isCompleted" class="done_status">Done</p>
       <p mat-line *ngIf="!toDo.isCompleted" class="unfinished_status">Unfinished</p>

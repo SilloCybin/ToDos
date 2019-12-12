@@ -48,7 +48,7 @@ describe('DashboardComponent', () => {
         MatRipple
       ],
       providers: [
-        { provide: ToDoService, useValue: jasmine.createSpyObj('toDoService', ['getAll', 'update']) }
+        { provide: ToDoService, useValue: jasmine.createSpyObj('toDoService', ['getAll', 'update', 'delete']) }
       ]
     })
       .compileComponents();
